@@ -16,6 +16,8 @@ public class SmsView extends FrameLayout {
 
     public TextView numberView;
 
+    private String messageId = "";
+
     public SmsView(Context context) {
         super(context);
         init();
@@ -41,5 +43,15 @@ public class SmsView extends FrameLayout {
     public void applyMessage(SmsMessage msg) {
         msgView.setText(msg.getDisplayMessageBody());
         numberView.setText(msg.getOriginatingAddress());
+
+        messageId = obtainMessageId(msg);
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public static String obtainMessageId(SmsMessage msg) {
+        return String.format("%d_%s", msg.getTimestampMillis(), msg.getOriginatingAddress());
     }
 }

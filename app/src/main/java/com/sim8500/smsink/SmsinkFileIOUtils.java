@@ -31,7 +31,7 @@ public class SmsinkFileIOUtils {
                 input.read(smsbuff, 0, lenval);
 
                 SmsMessage sms = SmsMessage.createFromPdu(smsbuff);
-
+                Log.d("Smsink_Reader", String.format("timestamp millis: %d, from: %s", sms.getTimestampMillis(), sms.getOriginatingAddress()));
                 resList.add(sms);
                 buff.rewind();
             }

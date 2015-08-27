@@ -135,7 +135,7 @@ public class MainActivity extends Activity implements SmsinkReceiver.SmsinkListe
 
         super.onSaveInstanceState(outState);
 
-        if(adapter.getMessages().size() > 0)
+        if(adapter.getMessages().size() >= 0)
         {
             FileOutputStream outp = null;
             try {
@@ -158,6 +158,22 @@ public class MainActivity extends Activity implements SmsinkReceiver.SmsinkListe
         }
     }
 
+    private void testFib(int n) {
+
+        long[] fibBuff = new long[3];
+
+        for(int i = 0; i < n+1; ++i) {
+
+            if(i == 0 || i == 1) {
+                fibBuff[i % 3] = i;
+            }
+            else {
+                fibBuff[i % 3] = fibBuff[(i-1) % 3] + fibBuff[(i-2) % 3];
+            }
+            Log.d("Main", String.format("%d", fibBuff[i %3]));
+        }
+    }
+
     public void onResume() {
         ComponentName comp = new ComponentName(this.getApplicationContext(), SmsinkWakefulReceiver.class.getName());
         if(getPackageManager() != null)
@@ -169,6 +185,7 @@ public class MainActivity extends Activity implements SmsinkReceiver.SmsinkListe
         this.registerReceiver(recv, filter);
 
         super.onResume();
+        testFib(50);
     }
 
     public void onPause()
@@ -223,8 +240,8 @@ public class MainActivity extends Activity implements SmsinkReceiver.SmsinkListe
             if(drawingPaint == null) {
                 drawingPaint = new Paint();
                 drawingPaint.setColor(Color.parseColor("#89BE44"));
-                drawingPaint.setStyle(Paint.Style.STROKE);
-                drawingPaint.setStrokeWidth(dpToPx(1.0f));
+                drawingPaint.setStyle(Paint.Style.FILL);
+                //drawingPaint.setStrokeWidth(dpToPx(1.0f));
                 drawingPaint.setAntiAlias(true);
             }
 
@@ -245,7 +262,7 @@ public class MainActivity extends Activity implements SmsinkReceiver.SmsinkListe
             }
             else canvas.drawColor(Color.argb(32, 255, 255, 255));
 
-            canvas.drawCircle(rx, ry, dpToPx(8.f), drawingPaint);
+            canvas.drawCircle(rx, ry, dpToPx(2.f), drawingPaint);
         }
 
 

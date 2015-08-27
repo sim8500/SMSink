@@ -5,7 +5,7 @@ android {
     buildToolsVersion '21.1.2'
 
     defaultConfig {
-        applicationId "sim8500.com.smsink"
+        applicationId "com.sim8500.smsink"
         minSdkVersion 19
         targetSdkVersion 21
         versionCode 1
@@ -13,7 +13,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

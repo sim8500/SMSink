@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:padding="8dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Are you sure you&apos;d like to remove message from list?"
+        android:id="@+id/textView"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="That&apos;s right."
+        android:id="@+id/confirm_button"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/msg_background"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:layout_marginTop="12dp" />
+</LinearLayout>
