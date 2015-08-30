@@ -3,9 +3,14 @@ package com.sim8500.smsink;
 import android.content.Context;
 import android.telephony.SmsMessage;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by sbernad on 12/01/15.
@@ -17,6 +22,14 @@ public class SmsView extends FrameLayout {
     public TextView numberView;
 
     private String messageId = "";
+
+    public TextView dateView;
+
+    public Button showMsgButton;
+
+    private String msgBody;
+
+    private boolean isMsgShown = false;
 
     public SmsView(Context context) {
         super(context);
@@ -38,11 +51,32 @@ public class SmsView extends FrameLayout {
 
         msgView = (TextView)findViewById(R.id.msgView);
         numberView = (TextView)findViewById(R.id.numberTxtView);
+        showMsgButton = (Button)findViewById(R.id.showMsgButton);
+        dateView = (TextView)findViewById(R.id.dateTxtView);
+
+        showMsgButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isMsgShown)
+                {
+                    isMsgShown = true;
+                    msgView.setText(msgBody);
+                    showMsgButton.setVisibility(GONE);
+                    msgView.requestLayout();
+                }
+            }
+        });
+
     }
 
     public void applyMessage(SmsMessage msg) {
-        msgView.setText(msg.getDisplayMessageBody());
+
+        msgBody = msg.getDisplayMessageBody();
+        msgView.setText("\"...\"");
         numberView.setText(msg.getOriginatingAddress());
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        dateView.setText(formatter.format(new Date(msg.getTimestampMillis())));
 
         messageId = obtainMessageId(msg);
     }

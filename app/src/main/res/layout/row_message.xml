@@ -10,26 +10,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Texts"
+        android:id="@+id/dateTxtView"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@android:color/holo_green_dark"
+        android:layout_alignParentEnd="false"
+        android:layout_marginRight="24dp"
+        android:layout_alignRight="@+id/msgView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Holo.Medium"
         android:text="Small Text"
         android:id="@+id/numberTxtView"
         android:layout_marginLeft="24dp"
         android:textStyle="bold"
         android:fontFamily="sans-serif-condensed"
-        android:textColor="#89BE44" />
+        android:textColor="#89BE44"
+        android:layout_below="@+id/dateTxtView"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text="~~~"
         android:id="@+id/msgView"
-        android:layout_centerVertical="true"
-        android:padding="16dp"
         android:background="@drawable/msg_background"
         android:fontFamily="sans-serif-condensed"
         android:textColor="#525252"
         android:textStyle="bold"
-        android:layout_below="@+id/numberTxtView" />
+        android:layout_below="@+id/numberTxtView"
+        android:visibility="visible"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:paddingBottom="45dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show msg"
+        android:id="@+id/showMsgButton"
+        android:layout_alignBottom="@+id/msgView"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
