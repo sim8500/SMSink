@@ -10,7 +10,11 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sbernad on 12/01/15.
@@ -29,7 +33,7 @@ public class SmsView extends FrameLayout {
 
     private String msgBody;
 
-    private boolean isMsgShown = false;
+    private static List<String> shownMsgs = new ArrayList<String>();
 
     public SmsView(Context context) {
         super(context);
@@ -57,28 +61,38 @@ public class SmsView extends FrameLayout {
         showMsgButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isMsgShown)
-                {
-                    isMsgShown = true;
+
+                if (!shownMsgs.contains(messageId)) {
                     msgView.setText(msgBody);
                     showMsgButton.setVisibility(GONE);
                     msgView.requestLayout();
+
+                    shownMsgs.add(messageId);
                 }
             }
+
+
         });
 
     }
 
     public void applyMessage(SmsMessage msg) {
 
+        messageId = obtainMessageId(msg);
         msgBody = msg.getDisplayMessageBody();
-        msgView.setText("\"...\"");
-        numberView.setText(msg.getOriginatingAddress());
 
+        numberView.setText(msg.getOriginatingAddress());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         dateView.setText(formatter.format(new Date(msg.getTimestampMillis())));
 
-        messageId = obtainMessageId(msg);
+        if(shownMsgs.contains(messageId)) {
+            msgView.setText(msgBody);
+            showMsgButton.setVisibility(GONE);
+        }
+        else {
+            msgView.setText("\"...\"");
+            showMsgButton.setVisibility(VISIBLE);
+        }
     }
 
     public String getMessageId() {
